@@ -18,7 +18,7 @@ import com.adobe.marketing.mobile.MobileCore
 class MainApplication : Application() {
 
     companion object {
-        const val LAUNCH_ENVIRONMENT_FILE_ID = "3149c49c3910/0f12baf27522/launch-c219c0fa9543"
+        const val LAUNCH_ENVIRONMENT_FILE_ID = "<YOUR_LAUNCH_ENVIRONMENT_FILE_ID>"
     }
 
     override fun onCreate() {
