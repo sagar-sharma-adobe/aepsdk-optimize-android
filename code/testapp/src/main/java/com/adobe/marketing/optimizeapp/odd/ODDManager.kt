@@ -1,5 +1,6 @@
 package com.adobe.marketing.optimizeapp.odd
 
+import com.adobe.marketing.mobile.edge.identity.Identity
 import com.adobe.marketing.mobile.optimize.DecisionScope
 import com.adobe.marketing.mobile.optimize.Offer
 import com.adobe.marketing.mobile.optimize.OptimizeProposition
@@ -16,6 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ODDManager(
     private val decisionScopes: () -> List<DecisionScope>,
     private val dataMap: () -> Map<String, Any>,
+    private val ecid: () -> String,
     private val coroutineScope: CoroutineScope
 ) {
 
@@ -61,7 +63,8 @@ class ODDManager(
                 val data = dataMap()
                 val event = ODDRequestBuilder.buildRequestEvent(
                     decisionScopeNames = decisionScopes,
-                    data = data
+                    data = data,
+                    ecid = ecid()
                 )
                 coroutineScope.launch(Dispatchers.IO) {
                     val response = apiService.postData(event)

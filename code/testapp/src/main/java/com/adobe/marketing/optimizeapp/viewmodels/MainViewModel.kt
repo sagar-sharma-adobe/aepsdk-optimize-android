@@ -30,9 +30,9 @@ import com.adobe.marketing.mobile.optimize.Optimize
 import com.adobe.marketing.mobile.optimize.OptimizeProposition
 import com.adobe.marketing.optimizeapp.impl.LogManager
 import com.adobe.marketing.optimizeapp.models.OptimizePair
+import com.adobe.marketing.optimizeapp.odd.ODDManager
 import com.adobe.marketing.optimizeapp.ui.model.PreferenceGroupData
 import com.adobe.marketing.optimizeapp.ui.model.PreferenceItemData
-import com.adobe.marketing.optimizeapp.odd.ODDManager
 
 class MainViewModel : ViewModel() {
 
@@ -60,6 +60,14 @@ class MainViewModel : ViewModel() {
 
     private val _dialogContent = mutableStateOf("")
     val dialogContent: State<String> = _dialogContent
+
+    private var ecid = ""
+
+    init {
+        Identity.getExperienceCloudId {
+            ecid = it
+        }
+    }
 
     private val _mutablePreferences = mutableStateOf(
         listOf(
@@ -123,6 +131,9 @@ class MainViewModel : ViewModel() {
         },
         dataMap = {
             return@ODDManager getDataMap(getTargetParams())
+        },
+        ecid = {
+            return@ODDManager ecid
         },
         coroutineScope = viewModelScope
     )

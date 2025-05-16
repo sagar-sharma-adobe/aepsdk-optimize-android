@@ -8,5 +8,6 @@ object OddConstants {
     const val PERSONALIZATION = "personalization"
     const val DATA = "data"
     const val XDM = "xdm"
+    const val IDENTITY_MAP = "identityMap"
 
 }
